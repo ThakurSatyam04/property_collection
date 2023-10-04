@@ -52,15 +52,10 @@ const CarsCard = ({imgSrc,bathrooms,bedrooms,city,country,currency,daysOnZillow,
       </div> <hr />
       <div className='w-full flex items-center justify-between mt-2'>
         <div>
-          <h2 ><span className='font-bold'>{currency}</span><sub>/month</sub></h2>
+          <h2 ><span className='font-bold'>{price}</span><sub>/month</sub></h2>
         </div>
         <div className='flex gap-3'>
-          <div className='w-[30px] h-[30px] bg-white rounded-full right-2  grid place-items-center' onClick={handleClick}>
-            {
-              isLiked ? ( <FcLike fontSize = '1.4rem'/>) : (<FcLikePlaceholder fontSize='1.4rem'/>)
-            }
-          </div>
-          <button className='bg-blue-500 p-1 text-white rounded-md hover:bg-blue-600'>Rent now</button>
+          <button className='p-1 text-blue-700 border-blue-700 border rounded-full hover:bg-blue-600 hover:text-white'>Read More</button>
         </div>
       </div>
       </div>
