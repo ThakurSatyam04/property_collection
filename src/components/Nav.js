@@ -17,8 +17,8 @@ const Nav = ({setFilteredCars,setSearchQuery,searchQuery}) => {
      };
 
   return (
-    <div className='flex items-center justify-center mt-4 '>
-      <div className='w-11/12 shadow-md border-white border rounded-2xl p-3 flex gap-10 bg-[#d3e5ecd5]'>
+    <div className='flex flex-col items-center justify-center mt-4 '>
+      {/* <div className='w-11/12 shadow-md border-white border rounded-2xl p-3 flex gap-10 bg-[#d3e5ecd5]'>
       <div className='w-16 flex items-center justify-center'>
           <img className='rounded-full' src="https://www.shutterstock.com/image-vector/car-garage-premium-concept-logo-250nw-1679598139.jpg" alt="" />
         </div>
@@ -37,10 +37,10 @@ const Nav = ({setFilteredCars,setSearchQuery,searchQuery}) => {
         <div className='flex gap-10'>
             <Drop_down title={"Relevance"}/>
             <Drop_down title={"All brands"}/>
-        </div>        
-
+        </div>         */}
+        <h1 className='text-2xl font-bold'>Featured Listed Property</h1>
+        <p className='w-[500px]'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est maiores nemo odio voluptatibus repellendus consectetur error neque quaerat quae quas!</p>
       </div>
-    </div>
   )
 }
 
