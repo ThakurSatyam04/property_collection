@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
-import CarsCard from './components/CarsCard';
-import carsData from './data';
-import { AiOutlineSearch } from "react-icons/ai";
+import PropertyCard from './components/PropertyCard';
 
-const CarDisplay = ({ cars,searchQuery,filteredCars }) => {
-  
-  
-
+const Property_Display = ({ properties}) => {
   const itemsPerPage = 6;
-  const totalPage = 10;
+  const totalPage = Math.ceil(properties.length / itemsPerPage);
+  // console.log(properties.length)
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastCar = currentPage * itemsPerPage;
   const indexOfFirstCar = indexOfLastCar - itemsPerPage;
-  const currentCars = cars.slice(indexOfFirstCar, indexOfLastCar);
+  const currentProperty = properties.slice(indexOfFirstCar, indexOfLastCar);
 
 
   const nextPage = () => {
-    if (currentPage < Math.ceil(cars.length / itemsPerPage)) {
+    if (currentPage < Math.ceil(properties.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -30,29 +26,13 @@ const CarDisplay = ({ cars,searchQuery,filteredCars }) => {
 
   return (
     <div>
-      {/* <div className='relative flex gap-5 items-center w-fit mt-5 ml-16'>
-            <input
-              className='w-[250px] p-2 rounded-xl' 
-              type="text" 
-              placeholder='Search...' 
-              value={searchQuery}
-              onChange={handleSearchTermChange}
-            />     
-            <div className='absolute right-4'>
-                <AiOutlineSearch/> 
-            </div>    
-        </div> */}
       <div className='flex items-center justify-center mt-2 flex-col p-10 '>
         <div className='w-11/12 flex flex-wrap gap-10 items-center justify-center '>
-        {searchQuery === '' ? (
-          currentCars.map((car) => (
-            <CarsCard key={car.id} {...car} />
-          ))
-        ) : (
-          filteredCars.map((car) => (
-            <CarsCard key={car.id} {...car} />
-          ))
-        )}
+            {
+              currentProperty.map((car) => (
+                <PropertyCard key={car.id} {...car} />
+              ))
+            }
         </div>
         <div className='w-10/12 flex justify-between mt-6 gap-5 items-center'>
           <div className='flex gap-2 ml-2'>
@@ -73,7 +53,7 @@ const CarDisplay = ({ cars,searchQuery,filteredCars }) => {
             {
               currentPage<totalPage && <button
               onClick={nextPage}
-              disabled={currentPage === Math.ceil(cars.length / itemsPerPage)}
+              disabled={currentPage === Math.ceil(properties.length / itemsPerPage)}
               className='rounded-md border px-2 py-0 border-black hover:bg-gray-900 hover:text-white'
             >
               Next
@@ -88,5 +68,5 @@ const CarDisplay = ({ cars,searchQuery,filteredCars }) => {
   );
 };
 
-export default CarDisplay;
+export default Property_Display;
 
