@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import PropertyCard from './components/PropertyCard';
 import Filter from './components/Filter';
 
-const Property_Display = ({ properties}) => {
+const Property_Display = ({ properties }) => {
   const itemsPerPage = 6;
   const totalPage = Math.ceil(properties.length / itemsPerPage);
-  // console.log(properties.length)
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCity, setSelectedCity] = useState('');
 
   const indexOfLastProperty = currentPage * itemsPerPage;
   const indexOfFirstProperty = indexOfLastProperty - itemsPerPage;
-  
-  const filteredProperties = selectedCity
-  ? properties.filter((property) => property.city === selectedCity)
-  : properties;
-  
-  const currentProperty = filteredProperties.slice(indexOfFirstProperty, indexOfLastProperty);
 
+  const filteredProperties = selectedCity
+    ? properties.filter((property) => property.city === selectedCity)
+    : properties;
+
+  const currentProperty = filteredProperties.slice(
+    indexOfFirstProperty,
+    indexOfLastProperty
+  );
 
   const nextPage = () => {
     if (currentPage < Math.ceil(filteredProperties.length / itemsPerPage)) {
@@ -33,59 +34,53 @@ const Property_Display = ({ properties}) => {
 
   const handleCityFilter = (city) => {
     setSelectedCity(city);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
-  const handleAllCity = () =>{
+  const handleAllCity = () => {
     window.location.reload();
-  }
+  };
 
   return (
-    <div>
-      <div className='flex items-center justify-center mt-2 flex-col p-10'>
-        <div className='w-10/12 flex justify-between items-center mb-4'>
-          <div className=''>
-            <Filter cars={properties} onCityFilter={handleCityFilter} selectedCity={selectedCity}/> 
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-col items-center justify-center mt-2">
+        <div className="w-full md:w-10/12 flex flex-col md:flex-row justify-between items-center mb-4">
+          <div className="mb-4 md:mb-0">
+            <Filter cars={properties} onCityFilter={handleCityFilter} selectedCity={selectedCity} />
           </div>
-          <div className='pl-2 pr-2 border border-blue-700 text-blue-800 font-semibold rounded-full'>
-            <button onClick={handleAllCity}>View All -></button>
-          </div>
-        </div>
-        <div className='w-11/12 flex flex-wrap gap-10 items-center justify-center '>
-            {
-              currentProperty.map((car) => (
-                <PropertyCard key={car.id} {...car} />
-              ))
-            }
-        </div>
-        <div className='w-10/12 flex justify-between mt-6 gap-5 items-center'>
-          <div className='flex gap-2 ml-2'>
-          <p>{currentPage}</p>of<p>{Math.ceil(filteredProperties.length / itemsPerPage)}</p>
-          </div>
-          <div className='flex gap-5'>
-
-            {
-              currentPage>1 && <button
-              onClick={prevPage}
-              disabled={currentPage === 1}
-              className='rounded-md border px-2 py-0 border-black hover:bg-gray-900 hover:text-white'
-            >
-              Previous
-            </button>
-            }
-
-            {
-              currentPage<totalPage && <button
-              onClick={nextPage}
-              disabled={currentPage === Math.ceil(properties.length / itemsPerPage)}
-              className='rounded-md border px-2 py-0 border-black hover:bg-gray-900 hover:text-white'
-            >
-              Next
-            </button>
-            }        
+          <div className="pl-2 pr-2 border border-blue-700 text-blue-800 font-semibold rounded-full">
+            <button onClick={handleAllCity}>View All -&gt;</button>
           </div>
         </div>
-        <div>
+        <div className="w-full flex flex-wrap gap-4 md:gap-10 items-center justify-center">
+          {currentProperty.map((car) => (
+            <PropertyCard key={car.id} {...car} />
+          ))}
+        </div>
+        <div className="w-10/12 flex flex-col md:flex-row justify-between mt-6 items-center">
+          <div className="flex justify-center md:justify-start gap-2 ml-2">
+            <p>{currentPage} of {Math.ceil(filteredProperties.length / itemsPerPage)}</p>
+          </div>
+          <div className=" flex justify-center md:justify-end gap-2">
+            {currentPage > 1 && (
+              <button
+                onClick={prevPage}
+                disabled={currentPage === 1}
+                className="btn"
+              >
+                Previous
+              </button>
+            )}
+            {currentPage < totalPage && (
+              <button
+                onClick={nextPage}
+                disabled={currentPage === Math.ceil(properties.length / itemsPerPage)}
+                className="btn"
+              >
+                Next
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -93,4 +88,3 @@ const Property_Display = ({ properties}) => {
 };
 
 export default Property_Display;
-
